@@ -1,6 +1,6 @@
 package com.applitools.Commands;
 
-import com.applitools.Utils.Validator;
+import com.applitools.Utilities.Validator;
 import com.applitools.eyes.TestResults;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;

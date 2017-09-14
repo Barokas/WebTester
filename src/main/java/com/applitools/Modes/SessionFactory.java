@@ -19,8 +19,8 @@ public class SessionFactory {
 //        }
 //
 //        try {
-//            cmd = Utils.parse(generalOptions_, args);
-//            mode_ = Utils.parseEnum(Commands.class, cmd.getOptionValue("m"));
+//            cmd = Utilities.parse(generalOptions_, args);
+//            mode_ = Utilities.parseEnum(Commands.class, cmd.getOptionValue("m"));
 //        } catch (ParseException e) {
 //            //e.printStackTrace();
 //            PrintGeneralHelp();
@@ -54,7 +54,7 @@ public class SessionFactory {
 //        Options options = new Options();
 //        options.addOption(Option.builder("m")
 //                .longOpt("mode")
-//                .desc(String.format("Execution mode [%s]", Utils.getEnumValues(Commands.class)))
+//                .desc(String.format("Execution mode [%s]", Utilities.getEnumValues(Commands.class)))
 //                .hasArg()
 //                .argName("mode")
 //                .required()

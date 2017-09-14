@@ -1,6 +1,6 @@
 package com.applitools.Commands;
 
-import com.applitools.Utils.Utils;
+import com.applitools.Utilities.Utils;
 import com.applitools.eyes.*;
 import com.applitools.eyes.selenium.Eyes;
 import com.applitools.eyes.selenium.StitchMode;
@@ -31,7 +31,7 @@ public abstract class ApplitoolsTest extends SeleniumTest {
 
     //App name
     @Parameter(names = {"-an", "--appName"}, description = "Set own application name, default: WebTester")
-    protected String appName = "WebTester";
+    protected String appName = null;
 
     //Viewport size
     @Parameter(names = {"-vs", "--viewportsize"}, description = "Set consistent viewport-size of the browser, width:height, ie:1000x600")
@@ -76,6 +76,10 @@ public abstract class ApplitoolsTest extends SeleniumTest {
     @Parameter(names = {"-sr", "--scaleRatio"}, description = "Overrides pixel-ratio")
     protected String scaleRatio = null;
 
+    //Save Failed Test
+    @Parameter(names = {"-sf", "--saveFailedTest"}, description = "Automatically accept test as the new baseline")
+    protected Boolean saveFailedTest = false;
+
     protected Eyes eyes_;
 
     public void Init() throws IOException, URISyntaxException, ParserConfigurationException, SAXException {
@@ -92,6 +96,7 @@ public abstract class ApplitoolsTest extends SeleniumTest {
         eyes_.setForceFullPageScreenshot(!disableFullPageScreenshot);
         eyes_.setStitchMode(useUserScrolling ? StitchMode.SCROLL : StitchMode.CSS);
         eyes_.setHideScrollbars(!showScrollbars);
+        eyes_.setSaveFailedTests(saveFailedTest);
 
         if (!Strings.isNullOrEmpty(serverUrl)) eyes_.setServerUrl(new URI(serverUrl));
         if (!Strings.isNullOrEmpty(proxyURL)) eyes_.setProxy(new ProxySettings(proxyURL));

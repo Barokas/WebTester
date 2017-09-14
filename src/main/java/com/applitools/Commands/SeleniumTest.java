@@ -2,7 +2,7 @@ package com.applitools.Commands;
 
 import com.applitools.Browser;
 import com.applitools.Modes.AttachedSession.AttachedWebDriver;
-import com.applitools.Utils.Validator;
+import com.applitools.Utilities.Validator;
 import com.beust.jcommander.Parameter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.logging.Level;

@@ -1,4 +1,4 @@
-package com.applitools.Utils;
+package com.applitools.Utilities;
 
 import com.google.common.base.Strings;
 

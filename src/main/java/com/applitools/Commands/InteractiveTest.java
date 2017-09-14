@@ -1,6 +1,6 @@
 package com.applitools.Commands;
 
-import com.applitools.Utils.Validator;
+import com.applitools.Utilities.Validator;
 import com.applitools.eyes.TestResults;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
@@ -12,7 +12,7 @@ public class InteractiveTest extends ApplitoolsTest {
     private static final String TEST_END = "~";
     private static final Scanner in = new Scanner(System.in);
 
-    @Parameter(names = {"-st", "--singletest"}, description = "Aet all the checkpoints be part of one test.")
+    @Parameter(names = {"-st", "--singletest"}, description = "Set all the checkpoints be part of one test.")
     private boolean singleTest = false;
 
     @Parameter(names = {"-tn", "--testName"}, description = "Applitools test name")

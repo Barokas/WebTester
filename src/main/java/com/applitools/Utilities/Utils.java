@@ -1,4 +1,4 @@
-package com.applitools.Utils;
+package com.applitools.Utilities;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 

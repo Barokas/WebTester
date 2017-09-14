@@ -17,6 +17,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static javax.xml.parsers.DocumentBuilderFactory.newInstance;
 
@@ -70,6 +72,7 @@ public class IterativeTest extends ApplitoolsTest {
         System.out.printf("Starting test on %s \n", location);
         int newtests = 0, failedtests = 0, total = pages_.size();
         int i = 0;
+        TestResults result=null;
         for (URI page : pages_) {
             String currAppName = (Strings.isNullOrEmpty(appName))
                     ? (page.getHost() != null ? page.getHost() : "WebTester") : appName;
@@ -79,21 +82,39 @@ public class IterativeTest extends ApplitoolsTest {
             driver_.get(page.toString());
             eyesCheck(page.toString());
 
-            TestResults result = eyes_.close(false);
+            result = eyes_.close(false);
             ++i;
             printResult(result, testName, i, total);
 
             if (result.isNew()) ++newtests;
             else if (!result.isPassed()) ++failedtests;
         }
-
         System.out.format("Test ended, Total Steps - %s, %s-Passed, %s-Failed, %s-New \n\n",
                 total, total - newtests - failedtests, failedtests, newtests);
-        //TODO print batch url
+        printBatcResultshUrl(result);
+
         //TODO exit process with state
     }
 
     private void printResult(TestResults result, String testName, int i, int total) {
         System.out.printf(" [%s] %s/%s - %s \n", stringStatus(result), i, total, testName);
     }
+
+    private void printBatcResultshUrl(TestResults result){
+        String RESULT_REGEX = "(?<serverURL>^.+)\\/app\\/batches\\/(?<batchId>\\d+)\\/(?<sessionId>\\d+).accountId=(?<accountId>.*$)";
+        Pattern pattern = Pattern.compile(RESULT_REGEX);
+        Matcher matcher = pattern.matcher(result.getUrl());
+        if (!matcher.find()) try {
+            throw new Exception("Unexpected result URL - Not parsable");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String batchID = matcher.group("batchId");
+        String serverURL = matcher.group("serverURL");
+        String accountId = matcher.group("accountId");
+
+        String url = serverURL+"/app/batches/"+batchID+"?accountId="+accountId;
+        System.out.println("To see the tests results in Applitools dashboard please navigate to - "+url);
+    }
+
 }
